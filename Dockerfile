@@ -23,6 +23,12 @@ RUN useradd -m -s /bin/bash -G sudo dev && \
     echo 'dev ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
+# Create nixbld group and users (required by Nix installer since 2.34+)
+RUN groupadd -g 30000 nixbld && \
+    for i in $(seq 1 10); do \
+      useradd -u $((30000 + i)) -g nixbld -G nixbld -M -d /var/empty -s /sbin/nologin "nixbld$i"; \
+    done
+
 # Install Nix (single-user mode, runs as root — simpler in containers)
 RUN curl -L https://nixos.org/nix/install | sh -s -- --no-daemon
 
