@@ -51,7 +51,7 @@ RUN mkdir -p /var/run/sshd && \
 # SSH host keys
 RUN ssh-keygen -A
 
-# Entrypoint script
+# Entrypoint script (cache bust v2)
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
