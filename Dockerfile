@@ -51,7 +51,10 @@ RUN mkdir -p /var/run/sshd && \
 # SSH host keys
 RUN ssh-keygen -A
 
-# Entrypoint script (cache bust v2)
+# Force rebuild of everything below this line
+ARG CACHE_BUST=7
+
+# Entrypoint script
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
