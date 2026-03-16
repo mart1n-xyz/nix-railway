@@ -12,10 +12,6 @@ if [ -n "$SSH_PUBLIC_KEY" ]; then
     chmod 600 /home/dev/.ssh/authorized_keys
     chown -R dev:dev /home/dev/.ssh
     echo "[entrypoint] SSH public key configured for dev user"
-    echo "[entrypoint] authorized_keys content: $(cat /home/dev/.ssh/authorized_keys)"
-    echo "[entrypoint] authorized_keys perms: $(ls -la /home/dev/.ssh/authorized_keys)"
-    echo "[entrypoint] .ssh perms: $(ls -la /home/dev/.ssh/)"
-    echo "[entrypoint] dev home perms: $(ls -la /home/ | grep dev)"
 else
     echo "[entrypoint] WARNING: SSH_PUBLIC_KEY is not set — SSH login will not work"
 fi
