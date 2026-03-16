@@ -1,0 +1,19 @@
+[build]
+builder = "dockerfile"
+dockerfilePath = "Dockerfile"
+
+[deploy]
+startCommand = "/entrypoint.sh"
+
+# Expose SSH port — Railway TCP proxy will map this to a public hostname:port
+[[deploy.tcpProxies]]
+applicationPort = 22
+
+# Health check: verify sshd is listening
+[deploy.healthcheck]
+type = "tcp"
+port = 22
+initialDelaySeconds = 10
+periodSeconds = 30
+timeoutSeconds = 5
+failureThreshold = 3
