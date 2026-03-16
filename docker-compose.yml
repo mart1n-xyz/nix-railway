@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  nix-railway:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      # Map host 2222 → container 22 (avoids needing root for port 22 locally)
+      - "2222:22"
+    environment:
+      # Paste your public key here for local testing, or use a .env file
+      SSH_PUBLIC_KEY: "${SSH_PUBLIC_KEY}"
+    volumes:
+      # Persist the Nix store locally (mirrors Railway volume behaviour)
+      - nix-store:/nix
+    restart: unless-stopped
+
+volumes:
+  nix-store:
+    driver: local
