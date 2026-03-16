@@ -29,8 +29,10 @@ if [ ! -d /nix/store ] || [ -z "$(ls -A /nix/store 2>/dev/null)" ]; then
     echo "[entrypoint] /nix/store is empty — installing Nix into volume..."
     curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | \
         sh -s -- install linux --no-confirm --init none
+    chown -R dev:dev /nix
     echo "[entrypoint] Nix installed successfully"
 elif [ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+    chown -R dev:dev /nix 2>/dev/null || true
     echo "[entrypoint] Nix store found on volume"
 fi
 
