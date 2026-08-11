@@ -1,5 +1,7 @@
 # nix-railway
 
+> **Disclaimer:** This is a personal, experimental hobby project. It is not an official Logos product. Not audited.
+
 A general-purpose Nix development environment designed to run on [Railway](https://railway.app), primarily used for Logos/LEZ testing and builds.
 
 Provides:
